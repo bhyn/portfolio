@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="김보현의 개발 포트폴리오. 웹·앱 서비스부터 임베디드 AI까지, 경험과 프로젝트를 소개합니다."
+    />
+    <meta name="theme-color" content="#f7f6f0" />
+    <title>김보현 Portfolio</title>
+    <link rel="preload" href="./static/woff2/Pretendard-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./static/woff2/Pretendard-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./static/pretendard.css" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f6f0;
+        --panel: #fffefa;
+        --line: #d9dfd4;
+        --text: #24332b;
+        --muted: #5b6c60;
+        --accent: #214c38;
+        --font-family: "Pretendard", sans-serif;
+        --anchor-offset: 96px;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        font-family: var(--font-family);
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-size: 16px;
+        line-height: 1.75;
+        word-break: keep-all;
+        overflow-wrap: anywhere;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 5px;
+        border-radius: 4px;
+      }
+      .skip-link {
+        position: fixed;
+        top: 12px;
+        left: 20px;
+        z-index: 30;
+        padding: 10px 16px;
+        border-radius: 8px;
+        background: var(--accent);
+        color: var(--bg);
+        font-weight: 700;
+        transform: translateY(-160%);
+      }
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(247, 246, 240, 0.94);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav {
+        max-width: 1180px;
+        margin: auto;
+        padding: 14px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 24px;
+      }
+      .eyebrow,
+      .project-category {
+        color: var(--accent);
+      }
+      .navlinks {
+        display: flex;
+        gap: 26px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .navlinks a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        white-space: nowrap;
+      }
+      .navlinks a:hover {
+        color: var(--accent);
+      }
+      .hero,
+      main {
+        max-width: 1180px;
+        margin: auto;
+        padding-inline: 28px;
+      }
+      .hero {
+        min-height: 520px;
+        padding-block: 96px 80px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+      }
+      .eyebrow {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+      }
+      .hero h1 {
+        font-size: clamp(56px, 8vw, 92px);
+        line-height: 1.15;
+        margin: 18px 0;
+        letter-spacing: -0.055em;
+      }
+      .hero p {
+        max-width: 40ch;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: 18px;
+      }
+      .section {
+        padding-block: 64px;
+        scroll-margin-top: var(--anchor-offset);
+      }
+      #main-content {
+        scroll-margin-top: var(--anchor-offset);
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+      .section-title .number {
+        flex-shrink: 0;
+        color: var(--accent);
+        font-size: clamp(24px, 2.5vw, 30px);
+        line-height: 1;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+      }
+      .section-title h2 {
+        font-size: clamp(30px, 4vw, 44px);
+        line-height: 1.2;
+        margin: 0;
+        letter-spacing: -0.04em;
+      }
+      .rule {
+        height: 1px;
+        flex: 1;
+        min-width: 20px;
+        background: var(--line);
+      }
+      .about-copy {
+        max-width: 100%;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.9;
+      }
+      .about-copy p:first-child {
+        margin-top: 0;
+      }
+      .about-copy p:last-child {
+        margin-bottom: 0;
+      }
+      .timeline {
+        position: relative;
+        padding-left: 30px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 30px;
+        bottom: 30px;
+        width: 1px;
+        background: var(--line);
+      }
+      .experience-card,
+      .project-card,
+      .skill-box {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(33, 76, 56, 0.04);
+      }
+      .experience-card {
+        position: relative;
+        padding: 26px 30px;
+        margin-bottom: 20px;
+      }
+      .experience-card:last-child,
+      .project-card:last-child {
+        margin-bottom: 0;
+      }
+      .experience-card::before {
+        content: "";
+        position: absolute;
+        left: -30px;
+        top: 30px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px var(--bg);
+      }
+      .card-top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px 24px;
+      }
+      .card-top > div:first-child,
+      .project-heading > div:last-child {
+        min-width: 0;
+      }
+      .card-company,
+      .project-category {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+      }
+      .card-company {
+        color: var(--muted);
+      }
+      .project-category {
+        margin-top: 8px;
+      }
+      .card-title {
+        font-size: 23px;
+        line-height: 1.4;
+        font-weight: 700;
+        margin: 6px 0 0;
+      }
+      .date {
+        flex-shrink: 0;
+        color: var(--muted);
+        font-size: 13px;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 20px;
+      }
+      .tag {
+        max-width: 100%;
+        color: var(--accent);
+        border: 1px solid var(--line);
+        background: #edf1e9;
+        border-radius: 7px;
+        padding: 4px 10px;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .project-card {
+        padding: 32px;
+        margin-bottom: 24px;
+      }
+      .project-card--illustrated {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 28px;
+      }
+      .project-copy,
+      .project-media {
+        min-width: 0;
+      }
+      .project-media {
+        margin: 0;
+      }
+      .project-media img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+      .project-heading {
+        display: flex;
+        gap: 15px;
+        align-items: flex-start;
+      }
+
+      .project-card h3 {
+        font-size: clamp(24px, 3vw, 31px);
+        line-height: 1.3;
+        margin: 0;
+        letter-spacing: -0.025em;
+      }
+      .project-card h3 a {
+        color: var(--accent);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 6px;
+      }
+      .project-card h3 a:hover {
+        text-decoration-thickness: 2px;
+      }
+
+      .project-card p {
+        max-width: 92ch;
+        margin: 16px 0 0;
+        color: var(--text);
+        line-height: 1.85;
+      }
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .skill-box {
+        min-width: 0;
+        padding: 24px;
+      }
+      .skill-box h3 {
+        color: var(--accent);
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        line-height: 1.5;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .skill-box .tags {
+        margin-top: 16px;
+      }
+      .contact {
+        text-align: center;
+        padding-bottom: 100px;
+      }
+      .contact-heading {
+        font-size: clamp(32px, 5vw, 62px);
+        line-height: 1.3;
+        font-weight: 700;
+        letter-spacing: -0.045em;
+        margin: 48px 0 20px;
+      }
+      .contact-heading span {
+        display: inline-block;
+        color: var(--accent);
+      }
+      .contact p {
+        color: var(--muted);
+      }
+      .contact-list {
+        display: grid;
+        grid-template-columns: 80px minmax(0, 1fr);
+        gap: 12px 24px;
+        max-width: 580px;
+        margin: auto 0;
+        text-align: left;
+      }
+      .contact-list dt {
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .contact-list dd {
+        min-width: 0;
+        margin: 0;
+      }
+      .contact-list a {
+        color: var(--accent);
+        text-decoration: underline;
+        text-decoration-color: #a6b8a8;
+        text-underline-offset: 4px;
+      }
+      .contact-list a:hover {
+        text-decoration-color: currentColor;
+      }
+      @media (max-width: 960px) {
+        .project-card--illustrated {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 24px;
+        }
+        .navlinks {
+          gap: 18px;
+        }
+        .skills-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 760px) {
+        :root {
+          --anchor-offset: 88px;
+        }
+        .nav {
+          flex-wrap: wrap;
+          padding: 10px 20px;
+          gap: 4px 16px;
+        }
+        .navlinks {
+          order: 3;
+          flex: 1 0 100%;
+          justify-content: space-between;
+          gap: 10px;
+          font-size: 12px;
+        }
+        .hero,
+        main {
+          padding-inline: 20px;
+        }
+        .hero {
+          min-height: 400px;
+          padding-block: 64px 56px;
+        }
+        .hero p {
+          font-size: 16px;
+        }
+        .section {
+          padding-block: 48px;
+        }
+        .section-title {
+          gap: 12px;
+          margin-bottom: 28px;
+        }
+        .about-copy {
+          font-size: 16px;
+        }
+        .card-top {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 8px;
+        }
+        .card-title {
+          font-size: 21px;
+        }
+        .date {
+          white-space: normal;
+        }
+        .experience-card,
+        .project-card {
+          padding: 24px;
+        }
+        .contact {
+          padding-bottom: 72px;
+        }
+      }
+      @media (max-width: 520px) {
+        .skills-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .timeline {
+          padding-left: 22px;
+        }
+        .experience-card::before {
+          left: -22px;
+          width: 8px;
+          height: 8px;
+        }
+        .experience-card {
+          padding: 20px;
+        }
+        .project-card,
+        .skill-box {
+          padding: 22px;
+        }
+        .project-heading {
+          gap: 12px;
+        }
+        .contact-list {
+          grid-template-columns: 62px minmax(0, 1fr);
+          gap: 12px 16px;
+          font-size: 14px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main-content">본문으로 바로가기</a>
+    <header class="topbar">
+      <nav class="nav" aria-label="주요 메뉴">
+        <div class="navlinks">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero" aria-labelledby="intro-title">
+      <div>
+        <h1 id="intro-title">김보현</h1>
+        <p>
+          Web/App 서비스부터 임베디드 AI까지,<br />
+          아이디어를 실제로 작동하는 시스템으로 구현합니다.
+        </p>
+      </div>
+    </section>
+
+    <main id="main-content" tabindex="-1">
+      <section id="about" class="section">
+        <div class="section-title">
+          <span class="number" aria-hidden="true">01.</span>
+          <h2>About Me</h2>
+          <div class="rule" aria-hidden="true"></div>
+        </div>
+        <div class="about-copy">
+          <p>
+            저는 새로운 기술을 배우고 직접 구현하는 과정을 좋아하는
+            개발자입니다. React Native 기반 앱 개발과 Node.js 백엔드 개발을
+            경험했으며, 최근에는 컴퓨터 시스템과 Edge AI 분야로 관심을
+            넓혔습니다.
+          </p>
+          <p>
+            새로운 기술을 배울 때 그 기술 너머로 지평이 넓어지는 감각을
+            좋아합니다.
+          </p>
+        </div>
+      </section>
+
+      <section id="experience" class="section">
+        <div class="section-title">
+          <span class="number" aria-hidden="true">02.</span>
+          <h2>Experience</h2>
+          <div class="rule" aria-hidden="true"></div>
+        </div>
+
+        <div class="timeline" id="experienceList">
+          <article class="experience-card">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">
+                  San Francisco State University 교환학생
+                </h3>
+              </div>
+              <div class="date">2026.08 — 2026.12</div>
+            </div>
+          </article>
+          <article class="experience-card">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">
+                  중앙대학교 컴퓨터 시스템 연구실(CSLAB) 학부연구생
+                </h3>
+              </div>
+              <div class="date">2026.06 — 2026.08</div>
+            </div>
+          </article>
+          <article class="experience-card">
+            <div class="card-top">
+              <div>
+                <h3 class="card-title">중앙대학교 소프트웨어학과 재학 중</h3>
+              </div>
+              <div class="date">2024.03 — 현재</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <div class="section-title">
+          <span class="number" aria-hidden="true">03.</span>
+          <h2>Projects</h2>
+          <div class="rule" aria-hidden="true"></div>
+        </div>
+
+        <article class="project-card project-card--illustrated">
+          <div class="project-copy">
+            <div class="project-heading">
+              <div>
+                <h3>
+                  <a
+                    href="https://github.com/erictweng/CMSIS-Executorch/tree/landmark/pipeline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Fingerspell</a
+                  >
+                </h3>
+                <div class="project-category">Edge AI 개발</div>
+              </div>
+            </div>
+            <p>
+              Arm + ExecuTorch Edge AI Challenge에서 Alif Ensemble E8 DevKit을
+              활용한 온디바이스 ASL 알파벳 인식 시스템을 개발했습니다. Palm
+              Detection, Hand Landmark, MLP 기반 분류 파이프라인을 Cortex-M55
+              CPU와 Ethos-U85 NPU에서 실행했습니다.
+            </p>
+            <p>
+              카메라 영상, confidence bar, 실시간 예측 알파벳과 인식 문장을
+              LCD에 표시하는 UI를 구현하고 실제 보드에서 수어 동작과 인식 결과를
+              테스트했습니다. 팀 2등을 수상했으며 15–16 FPS와 held-out landmark
+              기준 94.5%의 정확도를 기록했습니다.
+            </p>
+            <div class="tags">
+              <span class="tag">Alif E8</span><span class="tag">Cortex-M55</span
+              ><span class="tag">Ethos-U85</span
+              ><span class="tag">ExecuTorch</span
+              ><span class="tag">PyTorch</span><span class="tag">C/C++</span
+              ><span class="tag">Python</span>
+            </div>
+          </div>
+          <figure class="project-media">
+            <img
+              src="./image%20(4).png"
+              alt="Fingerspell 온디바이스 수어 인식 프로젝트 소개"
+              width="2702"
+              height="1282"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </article>
+
+        <article class="project-card">
+          <div class="project-heading">
+            <div>
+              <h3>Robot Arm Miling Machine for Wing</h3>
+              <div class="project-category">소프트웨어 개발</div>
+            </div>
+          </div>
+          <p>
+            컴퓨터 시스템 연구실에서 수행한 로봇팔 프로젝트에서 CAD 좌표계와
+            실제 작업물 좌표계 사이의 차이를 보정하는 3D rigid registration
+            모듈을 구현했습니다. marker 대응점과 SVD를 이용해 회전행렬과
+            이동벡터를 계산하고 CAD상의 hole 위치와 normal vector를 실제
+            좌표계로 변환했습니다.
+          </p>
+          <p>
+            RMSE와 marker별 오차를 계산하고 OK/WARN/FAIL 상태를 판정했으며,
+            결과를 JSON으로 전달하고 registration 기록을 조회하는 API를
+            구현했습니다. 테스트에서 평균 약 1.3mm의 오차를 확인했습니다.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">SVD</span
+            ><span class="tag">3D Registration</span
+            ><span class="tag">JSON</span><span class="tag">REST API</span>
+          </div>
+        </article>
+
+        <article class="project-card project-card--illustrated">
+          <div class="project-copy">
+            <div class="project-heading">
+              <div>
+                <h3>
+                  <a
+                    href="https://github.com/bhyn/cau_hackerton2026"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >뭐입지???</a
+                  >
+                </h3>
+                <div class="project-category">AI, 백엔드 개발</div>
+              </div>
+            </div>
+            <p>
+              “캐주얼한 흰색 반팔”처럼 자연어로 입력한 의류 검색어에서 색상,
+              카테고리, 브랜드, 스타일을 추출해 검색 조건으로 변환하는 서비스를
+              개발했습니다. PostgreSQL Full-Text Search와 속성 기반 필터링을
+              결합했으며 OpenAI Vision API로 상품 이미지의 정보를 추출했습니다.
+            </p>
+            <p>
+              “블랙”과 “검은색”, “썸머”와 “여름”처럼 같은 의미의 표현을 처리하기
+              위해 표준값과 동의어를 분리한 Dictionary 기반 정규화 구조를
+              설계했습니다.
+            </p>
+            <div class="tags">
+              <span class="tag">FastAPI</span><span class="tag">PostgreSQL</span
+              ><span class="tag">Full-Text Search</span
+              ><span class="tag">Python</span>
+            </div>
+          </div>
+          <figure class="project-media">
+            <img
+              src="./image%20(7).png"
+              alt="뭐입지 자연어 의류 검색 결과 화면"
+              width="1496"
+              height="1010"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </article>
+
+        <article class="project-card project-card--illustrated">
+          <div class="project-copy">
+            <div class="project-heading">
+              <div>
+                <h3>
+                  <a
+                    href="https://github.com/Melonging/wearly-backend"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Wearly</a
+                  >
+                </h3>
+                <div class="project-category">백엔드 개발</div>
+              </div>
+            </div>
+            <p>
+              사용자의 옷과 코디를 관리하는 디지털 옷장 서비스입니다. Node.js
+              백엔드와 날씨, 이미지 배경 제거 등 외부 API를 연동했으며 API
+              속도와 결제 문제를 분석한 뒤 더 안정적인 API와 자체 기능으로
+              교체하는` 작업을 진행했습니다.
+            </p>
+            <p>
+              실제 출시를 목표로 개발을 이어가고 있으며, 사용자의 옷 데이터를
+              기반으로 코디를 추천하는 AI 모델도 개발하고 있습니다.
+            </p>
+            <div class="tags">
+              <span class="tag">Node.js</span><span class="tag">Express</span
+              ><span class="tag">MySQL</span>
+            </div>
+          </div>
+          <figure class="project-media">
+            <img
+              src="./image%20(6).png"
+              alt="Wearly 디지털 옷장과 코디 관리 앱 소개"
+              width="1620"
+              height="878"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </article>
+
+        <article class="project-card project-card--illustrated">
+          <div class="project-copy">
+            <div class="project-heading">
+              <div>
+                <h3>
+                  <a
+                    href="https://github.com/bhyn/Bandnol-Front"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >밴놀</a
+                  >
+                </h3>
+                <div class="project-category">프론트엔드 개발</div>
+              </div>
+            </div>
+            <p>
+              인디밴드 음악을 탐색하고 추천하는 React Native 커뮤니티 앱입니다.
+              음악 추천 기록을 달력과 리스트로 보여주는 화면, 프로필 이미지
+              업로드, 추천 카드 공유 기능을 구현했습니다.
+            </p>
+            <p>
+              달력 API의 데이터 지연 문제를 리스트 API fallback으로 해결했고,
+              이미지 용량 제한 문제는 FormData 변환과 이미지 압축으로
+              해결했습니다.
+            </p>
+            <div class="tags">
+              <span class="tag">React Native</span
+              ><span class="tag">TypeScript</span
+              ><span class="tag">REST API</span>
+            </div>
+          </div>
+          <figure class="project-media">
+            <img
+              src="./image%20(5).png"
+              alt="밴놀 인디 음악 추천 앱 소개 및 모바일 화면"
+              width="2440"
+              height="2091"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </article>
+      </section>
+
+      <section id="skills" class="section">
+        <div class="section-title">
+          <span class="number" aria-hidden="true">04.</span>
+          <h2>Skills</h2>
+          <div class="rule" aria-hidden="true"></div>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-box">
+            <h3>Languages</h3>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">JavaScript</span
+              ><span class="tag">TypeScript</span><span class="tag">C/C++</span
+              ><span class="tag">Java</span><span class="tag">SQL</span>
+            </div>
+          </div>
+          <div class="skill-box">
+            <h3>Frontend / Mobile</h3>
+            <div class="tags">
+              <span class="tag">React</span><span class="tag">React Native</span
+              ><span class="tag">HTML/CSS</span><span class="tag">Figma</span>
+            </div>
+          </div>
+          <div class="skill-box">
+            <h3>Backend / Database / AI</h3>
+            <div class="tags">
+              <span class="tag">Node.js</span><span class="tag">Express</span
+              ><span class="tag">FastAPI</span><span class="tag">MySQL</span
+              ><span class="tag">PostgreSQL</span
+              ><span class="tag">SpringBoot</span
+              ><span class="tag">Pytorch</span>
+            </div>
+          </div>
+
+          <div class="skill-box">
+            <h3>Tools / Design</h3>
+            <div class="tags">
+              <span class="tag">Git</span><span class="tag">GitHub</span
+              ><span class="tag">Docker</span
+              ><span class="tag">Illustrator</span
+              ><span class="tag">Photoshop</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact">
+        <div class="section-title">
+          <span class="number" aria-hidden="true">05.</span>
+          <h2>Contact</h2>
+          <div class="rule" aria-hidden="true"></div>
+        </div>
+        <dl class="contact-list">
+          <dt>Email</dt>
+          <dd><a href="mailto:10amykim@gmail.com">10amykim@gmail.com</a></dd>
+          <dt>GitHub</dt>
+          <dd>
+            <a
+              href="https://github.com/bhyn"
+              target="_blank"
+              rel="noopener noreferrer"
+              >github.com/bhyn</a
+            >
+          </dd>
+          <dt>LinkedIn</dt>
+          <dd>
+            <a
+              href="https://www.linkedin.com/in/bohyun-kim-3747ba402/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >linkedin.com/in/bohyun-kim-3747ba402</a
+            >
+          </dd>
+        </dl>
+      </section>
+    </main>
+  </body>
+</html>
